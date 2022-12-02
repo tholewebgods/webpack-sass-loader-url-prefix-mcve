@@ -7,5 +7,13 @@ Scenario:
 - The sass-loader takes the source of the .svg and prefix the souce with a relative path
 
 ```
-<add example output>
+background-image: url(..//%3Csvg%3E%3C/svg%3E);
+```
+
+
+# Run reproducer
+
+```
+$ npm install
+$ npm run build
 ```
