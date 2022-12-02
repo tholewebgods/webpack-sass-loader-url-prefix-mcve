@@ -44,12 +44,22 @@ module.exports = function(app, client) {
 									parser: "postcss-scss",
 									plugins: [
 										require("postcss-preset-env"),
-										require("postcss-url")([
-											{
-												encodeType: "base64",
-												url: "inline",
-											},
-										]),
+										require("postcss-url")({
+											// Transformation for url()
+											url: "inline",
+											basePath: [
+												// postcss-url tries to search the url
+												// relative to the referencing (s)css
+												// file, which is located at src/sass/
+												// in this example. Since it references
+												// assets/asset.svg, we've to go one
+												// level up
+												// Note: the reason for the asset.svg
+												// being relative to src is benefiting
+												// from resolution by alias (prefix)
+												"../"
+											]
+										}),
 									],
 								},
 							},
