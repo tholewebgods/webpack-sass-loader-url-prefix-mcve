@@ -22,7 +22,13 @@ module.exports = function(app, client) {
 			rules: [
 				{
 					test: /\.svg$/,
-					type: "asset/source",
+					type: "asset/inline",
+					generator: {
+						dataUrl: (content) => {
+							console.log(content.toString());
+							return `DATA-URL(${content.toString()})`;
+						}
+					}
 				},
 				{
 					test: /\.scss$/,
