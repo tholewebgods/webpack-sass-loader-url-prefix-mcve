@@ -21,10 +21,6 @@ module.exports = function(app, client) {
 		module: {
 			rules: [
 				{
-					test: /\.svg$/,
-					type: "asset/source",
-				},
-				{
 					test: /\.scss$/,
 					use: [
 						{
@@ -39,6 +35,23 @@ module.exports = function(app, client) {
 							options: {
 								// Enable @import at-rules handling
 								import: true,
+							},
+						},
+						{
+							loader: "postcss-loader",
+							options: {
+								postcssOptions: {
+									parser: "postcss-scss",
+									plugins: [
+										require("postcss-preset-env"),
+										require("postcss-url")([
+											{
+												encodeType: "base64",
+												url: "inline",
+											},
+										]),
+									],
+								},
 							},
 						},
 						{
